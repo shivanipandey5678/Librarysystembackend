@@ -47,14 +47,14 @@ const login = async (req, res) => {
         const refreshToken = jwt.sign({ id: existedUser._id, email: existedUser.email }, process.env.JWT_REFRESH_TOKEN, { expiresIn: '2h' })
         res.cookie('accessToken', accesstoken, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
+            secure: true,
+            sameSite: 'None',
             maxAge: 30 * 60 * 1000
         });
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
+             secure: true,
+            sameSite: 'None',
             maxAge: 2 * 60 * 60 * 1000
         })
         res.status(200).json({ message: "login successfully", userId: { id: existedUser._id, email: existedUser.email } });
